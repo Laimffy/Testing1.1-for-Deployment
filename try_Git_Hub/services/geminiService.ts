@@ -1,12 +1,12 @@
-
 import { GoogleGenAI, Modality, GenerateContentResponse } from "@google/genai";
 
-// Ensure the API key is available in the environment variables
-if (!process.env.API_KEY) {
-  throw new Error("API_KEY environment variable not set.");
+// Access the API key from Vite's environment variables
+const apiKey = import.meta.env.VITE_API_KEY;
+if (!apiKey) {
+  throw new Error("VITE_API_KEY environment variable not set.");
 }
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+const ai = new GoogleGenAI({ apiKey: apiKey });
 
 export const translateText = async (text: string, sourceLang: string, targetLang: string): Promise<string> => {
   if (!text.trim()) return '';
